@@ -1,20 +1,20 @@
-#Import Flask Library
+# Import Flask Library
 from flask import Flask, render_template, request, session, url_for, redirect
 import pymysql.cursors
 
-#Initialize the app from Flask
+# Initialize the app from Flask
 app = Flask(__name__)
 
-#Configure MySQL
+# Configure MySQL
 conn = pymysql.connect(host='localhost',
-                       port = 8889,
-                       user='',
-                       password='',
-                       db='',
+                       port=3306,
+                       user='root',
+                       password='n21452429N',
+                       db='SportsManagement',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
 
-#Define a route to hello function
+# Define a route to hello function
 @app.route('/')
 def hello():
     return render_template('index.html')
@@ -82,6 +82,30 @@ def registerAuth():
         conn.commit()
         cursor.close()
         return render_template('index.html')
+
+@app.route('/admin')
+def admin():
+    return render_template('administratorHome.html')
+
+@app.route('/updateCoachSalary')
+def updateCoachSalary():
+    return render_template('updateCoachSalary.html')
+
+@app.route('/displayFinancialReport')
+def displayFinancialReport():
+    return render_template('displayFinancialReport.html')
+
+@app.route('/athlete')
+def athlete():
+    return render_template('athleteHome.html')
+
+@app.route('/manageClasses')
+def manageClasses():
+    return render_template('manageClasses.html')
+
+@app.route('/manageEquipment')
+def manageEquipments():
+    return render_template('manageEquipments.html')
 
 @app.route('/logout')
 def logout():
