@@ -43,7 +43,7 @@ def loginAuth():
     #cursor used to send queries
     cursor = conn.cursor()
     #executes query
-    query = 'SELECT * FROM users WHERE username = %s and password = %s'
+    query = 'SELECT * FROM users WHERE username = %s and password = %s and role = "athlete"'
     cursor.execute(query, (username, password))
     #stores the results in a variable
     data = cursor.fetchone()
@@ -54,11 +54,39 @@ def loginAuth():
         #creates a session for the the user
         #session is a built in
         session['username'] = username
-        return redirect(url_for('home'))
+        return redirect(url_for('athlete'))
     else:
-        #returns an error message to the html page
-        error = 'Invalid login or username'
-        return render_template('login.html', error=error)
+        cursor = conn.cursor()
+        # executes query
+        query = 'SELECT * FROM users WHERE username = %s and password = %s and role = "coach"'
+        cursor.execute(query, (username, password))
+        # stores the results in a variable
+        data = cursor.fetchone()
+        # use fetchall() if you are expecting more than 1 data row
+        cursor.close()
+        if (data):
+            # creates a session for the the user
+            # session is a built in
+            session['username'] = username
+            return redirect(url_for('coach'))
+        else:
+            cursor = conn.cursor()
+            # executes query
+            query = 'SELECT * FROM users WHERE username = %s and password = %s and role = "admin"'
+            cursor.execute(query, (username, password))
+            # stores the results in a variable
+            data = cursor.fetchone()
+            # use fetchall() if you are expecting more than 1 data row
+            cursor.close()
+            if (data):
+                # creates a session for the the user
+                # session is a built in
+                session['username'] = username
+                return redirect(url_for('admin'))
+            else:
+                #returns an error message to the html page
+                error = 'Invalid login or username'
+                return render_template('login.html', error=error)
 
 #Authenticates the register
 @app.route('/registerAuthAthlete', methods=['GET', 'POST'])
@@ -70,7 +98,7 @@ def registerAuthAthlete():
     lastName = request.form['lastName']
     phoneNumber = request.form['phoneNumber']
     email = request.form['email']
-    role = 'Athlete'
+    role = 'athlete'
 
     #cursor used to send queries
     cursor = conn.cursor()
@@ -101,7 +129,7 @@ def registerAuthCoach():
     lastName = request.form['lastName']
     phoneNumber = request.form['phoneNumber']
     email = request.form['email']
-    role = 'Athlete'
+    role = 'coach'
 
     #cursor used to send queries
     cursor = conn.cursor()
@@ -134,6 +162,10 @@ def updateCoachSalary():
 @app.route('/displayFinancialReport')
 def displayFinancialReport():
     return render_template('displayFinancialReport.html')
+
+@app.route('/coach')
+def coach():
+    return render_template('coachHome.html')
 
 @app.route('/athlete')
 def athlete():
