@@ -123,6 +123,30 @@ def registerAuthCoach():
         cursor.close()
         return render_template('index.html')
 
+@app.route('/admin')
+def admin():
+    return render_template('administratorHome.html')
+
+@app.route('/updateCoachSalary')
+def updateCoachSalary():
+    return render_template('updateCoachSalary.html')
+
+@app.route('/displayFinancialReport')
+def displayFinancialReport():
+    return render_template('displayFinancialReport.html')
+
+@app.route('/athlete')
+def athlete():
+    return render_template('athleteHome.html')
+
+@app.route('/manageClasses')
+def manageClasses():
+    return render_template('manageClasses.html')
+
+@app.route('/manageEquipment')
+def manageEquipments():
+    return render_template('manageEquipments.html')
+
 @app.route('/logout')
 def logout():
     session.pop('username')
