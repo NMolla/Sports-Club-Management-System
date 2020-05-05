@@ -26,12 +26,8 @@ def login():
 
 #Define route for register
 @app.route('/registerAsAthlete')
-def registerAsAthlete():
-    return render_template('registerAsAthlete.html')
-
-@app.route('/registerAsCoach')
-def registerAsCoach():
-    return render_template('registerAsCoach.html')
+def register():
+    return render_template('register.html')
 
 #Authenticates the login
 @app.route('/loginAuth', methods=['GET', 'POST'])
@@ -43,8 +39,8 @@ def loginAuth():
     #cursor used to send queries
     cursor = conn.cursor()
     #executes query
-    query = 'SELECT * FROM users WHERE username = %s and password = %s and role = "athlete"'
-    cursor.execute(query, (username, password))
+    query = 'SELECT * FROM users WHERE username = %s and password = %s and role = %s'
+    cursor.execute(query, (username, password, 'athlete'))
     #stores the results in a variable
     data = cursor.fetchone()
     #use fetchall() if you are expecting more than 1 data row
@@ -58,8 +54,8 @@ def loginAuth():
     else:
         cursor = conn.cursor()
         # executes query
-        query = 'SELECT * FROM users WHERE username = %s and password = %s and role = "coach"'
-        cursor.execute(query, (username, password))
+        query = 'SELECT * FROM users WHERE username = %s and password = %s and role = %s'
+        cursor.execute(query, (username, password, 'coach'))
         # stores the results in a variable
         data = cursor.fetchone()
         # use fetchall() if you are expecting more than 1 data row
@@ -72,8 +68,8 @@ def loginAuth():
         else:
             cursor = conn.cursor()
             # executes query
-            query = 'SELECT * FROM users WHERE username = %s and password = %s and role = "admin"'
-            cursor.execute(query, (username, password))
+            query = 'SELECT * FROM users WHERE username = %s and password = %s and role = %s'
+            cursor.execute(query, (username, password, 'admin'))
             # stores the results in a variable
             data = cursor.fetchone()
             # use fetchall() if you are expecting more than 1 data row
@@ -89,8 +85,8 @@ def loginAuth():
                 return render_template('login.html', error=error)
 
 #Authenticates the register
-@app.route('/registerAuthAthlete', methods=['GET', 'POST'])
-def registerAuthAthlete():
+@app.route('/registerAuth', methods=['GET', 'POST'])
+def registerAuth():
     #grabs information from the forms
     username = request.form['username']
     password = request.form['password']
@@ -98,7 +94,7 @@ def registerAuthAthlete():
     lastName = request.form['lastName']
     phoneNumber = request.form['phoneNumber']
     email = request.form['email']
-    role = 'athlete'
+    role = 'pick athlete or coach' # athlete or coach !!!!!!!!!!!!
 
     #cursor used to send queries
     cursor = conn.cursor()
@@ -112,38 +108,7 @@ def registerAuthAthlete():
     if(data):
         #If the previous query returns data, then user exists
         error = "This user already exists"
-        return render_template('registerAsAthlete.html', error = error)
-    else:
-        ins = 'INSERT INTO users VALUES(%s, %s, %s, %s, %s, %s, %s)'
-        cursor.execute(ins, (username, password, firstName, lastName, phoneNumber, email, role))
-        conn.commit()
-        cursor.close()
-        return render_template('index.html')
-
-@app.route('/registerAuthCoach', methods=['GET', 'POST'])
-def registerAuthCoach():
-    #grabs information from the forms
-    username = request.form['username']
-    password = request.form['password']
-    firstName = request.form['firstName']
-    lastName = request.form['lastName']
-    phoneNumber = request.form['phoneNumber']
-    email = request.form['email']
-    role = 'coach'
-
-    #cursor used to send queries
-    cursor = conn.cursor()
-    #executes query
-    query = 'SELECT * FROM users WHERE username = %s'
-    cursor.execute(query, (username))
-    #stores the results in a variable
-    data = cursor.fetchone()
-    #use fetchall() if you are expecting more than 1 data row
-    error = None
-    if(data):
-        #If the previous query returns data, then user exists
-        error = "This user already exists"
-        return render_template('registerAsCoach.html', error = error)
+        return render_template('register.html', error = error)
     else:
         ins = 'INSERT INTO users VALUES(%s, %s, %s, %s, %s, %s, %s)'
         cursor.execute(ins, (username, password, firstName, lastName, phoneNumber, email, role))
