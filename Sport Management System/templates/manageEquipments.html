@@ -5,6 +5,31 @@
     <title>Manage Equipments</title>
 </head>
 <body>
+    <h1>Equipments</h1>
+
+    <h3>Checked Equipments</h3>
+
+    <style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+    </style>
+
+    <table>
+        <th>ID</th>
+        <th>Name</th>
+        <th>No. of Units</th>
+        {% for line in checkedEquipments %} <!checkedEquipments not configured yet>
+            <tr>
+            <td>{{line.equipmentID}}</td>
+            <td>{{line.equipmentName}}</td>
+            <td>{{line.units}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Checkout Equipment</h3>
+    search bar && button
 
 </body>
 </html>
