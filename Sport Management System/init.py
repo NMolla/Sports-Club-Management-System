@@ -165,7 +165,14 @@ def displayFinancialReport():
 
 @app.route('/coach')
 def coach():
-    return render_template('coachHome.html')
+    user = session['username']
+    cursor = conn.cursor()
+    query4 = 'SELECT firstName, lastName FROM users WHERE \
+                  member_username=%s AND owner_username != %s ORDER BY owner_username'
+    cursor.execute(query4, (user, user))
+    data4 = cursor.fetchall()
+    cursor.close()
+    return render_template('coachHome.html', username=user, photos=data, myphotos=data2, mygroups=data3, ingroups=data4)
 
 @app.route('/athlete')
 def athlete():
