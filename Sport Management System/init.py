@@ -25,7 +25,7 @@ def login():
     return render_template('login.html')
 
 #Define route for register
-@app.route('/registerAsAthlete')
+@app.route('/register')
 def register():
     return render_template('register.html')
 
@@ -50,7 +50,7 @@ def loginAuth():
         #creates a session for the the user
         #session is a built in
         session['username'] = username
-        return redirect(url_for('athlete'))
+        return render_template('athleteHome.html', username=username)
     else:
         cursor = conn.cursor()
         # executes query
@@ -64,7 +64,7 @@ def loginAuth():
             # creates a session for the the user
             # session is a built in
             session['username'] = username
-            return redirect(url_for('coach'))
+            return render_template('coachHome.html', username=username)
         else:
             cursor = conn.cursor()
             # executes query
@@ -78,7 +78,7 @@ def loginAuth():
                 # creates a session for the the user
                 # session is a built in
                 session['username'] = username
-                return redirect(url_for('admin'))
+                return render_template('adminHome.html', username=username)
             else:
                 #returns an error message to the html page
                 error = 'Invalid login or username'
@@ -94,7 +94,7 @@ def registerAuth():
     lastName = request.form['lastName']
     phoneNumber = request.form['phoneNumber']
     email = request.form['email']
-    role = 'pick athlete or coach' # athlete or coach !!!!!!!!!!!!
+    role = request.form['role']
 
     #cursor used to send queries
     cursor = conn.cursor()

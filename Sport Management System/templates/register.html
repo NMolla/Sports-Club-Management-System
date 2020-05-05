@@ -9,6 +9,11 @@
 	<input type="text" name = "lastName" placeholder="lastName" required/></br>
 	<input type="text" name = "phoneNumber" placeholder="phoneNumber" required/></br>
 	<input type="text" name = "email" placeholder="email" required/></br>
+	<p>Please select your role:</p>
+	<input type="radio" id="athlete" name="role" value="athlete">
+	<label for="athlete">Athlete</label><br>
+	<input type="radio" id="coach" name="role" value="coach">
+	<label for="coach">Coach</label><br>
 	<input type="submit" value = Register />
 	{% if error %}
 		<p class="error"><strong>Error:</strong> {{error}}</p>
