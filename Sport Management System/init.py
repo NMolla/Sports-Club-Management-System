@@ -117,8 +117,36 @@ def registerAuth():
         return render_template('index.html')
 
 @app.route('/admin')
-def admin():
+def admin(): # irrelevant?
     return render_template('administratorHome.html')
+
+@app.route('/coach')
+def coach(): # irrelevant?
+    return render_template('coachHome.html')
+
+@app.route('/athlete')
+def athlete(): # irrelevant?
+    return render_template('athleteHome.html')
+
+@app.route('/manageClasses')
+def manageClasses():
+    # user = session['username']
+    cursor = conn.cursor()
+    query1 = 'find registered classes' # configure
+    cursor.execute(query1) # add parameters
+    data1 = cursor.fetchall() # list of all enrolled classes
+    cursor.close()
+    return render_template('manageClasses.html', registeredClasses=data1)
+
+@app.route('/manageEquipments')
+def manageEquipments():
+    # user = session['username']
+    cursor = conn.cursor()
+    query1 = 'find checked equipments'  # configure
+    cursor.execute(query1)  # add parameters
+    data1 = cursor.fetchall()  # list of all enrolled classes
+    cursor.close()
+    return render_template('manageEquipments.html', checkedEquipments=data1)
 
 @app.route('/updateCoachSalary')
 def updateCoachSalary():
@@ -127,22 +155,6 @@ def updateCoachSalary():
 @app.route('/displayFinancialReport')
 def displayFinancialReport():
     return render_template('displayFinancialReport.html')
-
-@app.route('/coach')
-def coach():
-    return render_template('coachHome.html')
-
-@app.route('/athlete')
-def athlete():
-    return render_template('athleteHome.html')
-
-@app.route('/manageClasses')
-def manageClasses():
-    return render_template('manageClasses.html')
-
-@app.route('/manageEquipment')
-def manageEquipments():
-    return render_template('manageEquipments.html')
 
 @app.route('/logout')
 def logout():

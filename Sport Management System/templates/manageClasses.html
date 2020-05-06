@@ -19,6 +19,13 @@
         <th>Sport</th>
         <th>Coach</th>
         <th>Time</th>
+        {% for line in registeredClasses %} <!registeredClasses not configured yet>
+            <tr>
+            <td>{{line.sport}}</td>
+            <td>{{line.coach}}</td>
+            <td>{{line.time}}</td>
+            </tr>
+        {% endfor %}
     </table>
 
     <br>
