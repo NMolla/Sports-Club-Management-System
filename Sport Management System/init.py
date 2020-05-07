@@ -78,7 +78,7 @@ def loginAuth():
                 # creates a session for the the user
                 # session is a built in
                 session['username'] = username
-                return render_template('adminHome.html', username=username)
+                return render_template('administratorHome.html', username=username)
             else:
                 #returns an error message to the html page
                 error = 'Invalid login or username'
@@ -153,8 +153,25 @@ def updateCoachSalary():
     return render_template('updateCoachSalary.html')
 
 @app.route('/displayFinancialReport')
-def displayFinancialReport():
-    return render_template('displayFinancialReport.html')
+def displayFinancialReport(): #Takes data from salary and membership tables to calculate total wage and fees
+    cursor = conn.cursor()
+    query = 'SELECT * FROM salary'
+    cursor.execute(query)
+    data = cursor.fetchall()
+    query1 = 'SELECT SUM(wage) AS totalWage FROM salary'
+    cursor.execute(query1)
+    data1 = cursor.fetchall()
+    query2 = 'SELECT * FROM membershipfee'
+    cursor.execute(query2)
+    data2 = cursor.fetchall()
+    query3 = 'SELECT SUM(fee) as totalFee FROM membershipfee'
+    cursor.execute(query3)
+    data3 = cursor.fetchall()
+    query4 = 'SELECT (SELECT SUM(fee) FROM membershipfee) - (SELECT SUM(wage) FROM salary) AS totalWage'
+    cursor.execute(query4)
+    data4 = cursor.fetchall()
+    cursor.close()
+    return render_template('displayFinancialReport.html', coachSalaries = data, totalCoachSalary = data1, athleteFees = data2, totalAthleteFees = data3, total = data4)
 
 @app.route('/logout')
 def logout():
