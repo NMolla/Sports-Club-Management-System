@@ -164,7 +164,24 @@ def manageEquipments():
 
 @app.route('/updateCoachSalary')
 def updateCoachSalary():
-    return render_template('updateCoachSalary.html')
+    #get all the coach info
+    cursor = conn.cursor()
+    query = 'SELECT * FROM salary'
+    cursor.execute(query)
+    data = cursor.fetchall()
+    cursor.close()
+    return render_template('updateCoachSalary.html', coaches=data)
+
+@app.route('/updateSalary', methods=['GET', 'POST'])
+def updateSalary():
+    coachID = request.args['coachID']
+    newWage = request.args['newWage']
+    cursor = conn.cursor()
+    upd = 'UPDATE salary SET wage = %s WHERE coachID = %s'
+    cursor.execute(upd, (newWage, coachID))
+    conn.commit()
+    cursor.close()
+    return redirect(url_for('admin'))
 
 @app.route('/displayFinancialReport')
 def displayFinancialReport(): #Takes data from salary and membership tables to calculate total wage and fees
