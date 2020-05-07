@@ -5,7 +5,8 @@ create table Users(
     lastName varchar(255),
     phoneNumber varchar(255),
     email varchar(255),
-    role varchar(255)
+    role varchar(255),
+	primary key(username)
 );
 
 
