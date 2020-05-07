@@ -114,6 +114,20 @@ def registerAuth():
         cursor.execute(ins, (username, password, firstName, lastName, phoneNumber, email, role))
         conn.commit()
         cursor.close()
+        if(role == 'athlete'):
+            cursor = conn.cursor()
+            ins = 'INSERT INTO membershipfee VALUES(%s, %s)'
+            cursor.execute(ins, (username, 100))
+            conn.commit()
+            cursor.close()
+        elif(role == 'coach'):
+            cursor = conn.cursor()
+            ins = 'INSERT INTO salary VALUES(%s, %s)'
+            cursor.execute(ins, (username, 100))
+            conn.commit()
+            cursor.close()
+        else:
+            return render_template('register.html', error=error)
         return render_template('index.html')
 
 @app.route('/admin')
