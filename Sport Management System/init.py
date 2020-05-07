@@ -130,18 +130,6 @@ def registerAuth():
             return render_template('register.html', error=error)
         return render_template('index.html')
 
-@app.route('/admin')
-def admin(): # irrelevant?
-    return render_template('administratorHome.html')
-
-@app.route('/coach')
-def coach(): # irrelevant?
-    return render_template('coachHome.html')
-
-@app.route('/athlete')
-def athlete(): # irrelevant?
-    return render_template('athleteHome.html')
-
 @app.route('/manageClasses')
 def manageClasses():
     # user = session['username']
