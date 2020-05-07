@@ -130,33 +130,21 @@ def registerAuth():
             return render_template('register.html', error=error)
         return render_template('index.html')
 
-@app.route('/admin')
-def admin(): # irrelevant?
-    return render_template('administratorHome.html')
-
-@app.route('/coach')
-def coach(): # irrelevant?
-    return render_template('coachHome.html')
-
-@app.route('/athlete')
-def athlete(): # irrelevant?
-    return render_template('athleteHome.html')
-
 @app.route('/manageClasses')
 def manageClasses():
-    # user = session['username']
+    user = session['username']
     cursor = conn.cursor()
-    query1 = 'find registered classes' # configure
-    cursor.execute(query1) # add parameters
+    query1 = 'SELECT sportID, coachID, time FROM Teaches WHERE athleteID = %s' # configure
+    cursor.execute(query1, user) # add parameters
     data1 = cursor.fetchall() # list of all enrolled classes
     cursor.close()
     return render_template('manageClasses.html', registeredClasses=data1)
 
 @app.route('/manageEquipments')
 def manageEquipments():
-    # user = session['username']
+    user = session['username']
     cursor = conn.cursor()
-    query1 = 'find checked equipments'  # configure
+    query1 = 'needs config'  # configure
     cursor.execute(query1)  # add parameters
     data1 = cursor.fetchall()  # list of all enrolled classes
     cursor.close()
