@@ -140,6 +140,17 @@ def manageClasses():
     cursor.close()
     return render_template('manageClasses.html', registeredClasses=data1)
 
+@app.route('/enrollInClass')
+def enrollInClass():
+    classToEnroll = request.args['classToEnroll']
+    # If already enrolled in class raise error.
+    # If taking another class during that day raise error
+
+@app.route('/dropClass')
+def dropClass():
+    classToDrop = request.args['classToDrop']
+    # If class does not exist raise error
+
 @app.route('/manageEquipments')
 def manageEquipments():
     user = session['username']
@@ -149,6 +160,14 @@ def manageEquipments():
     data1 = cursor.fetchall()  # list of all enrolled classes
     cursor.close()
     return render_template('manageEquipments.html', checkedEquipments=data1)
+
+@app.route('/checkoutEquipment')
+def checkoutEquipment():
+    equipmentToCheckout = request.args['equipmentToCheckout']
+
+@app.route('/returnEquipment')
+def returnEquipment():
+    equipmentToReturn = request.args['equipmentToReturn']
 
 @app.route('/updateCoachSalary')
 def updateCoachSalary():

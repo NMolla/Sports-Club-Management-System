@@ -18,18 +18,29 @@
     <table>
         <th>ID</th>
         <th>Name</th>
-        <th>No. of Units</th>
         {% for line in checkedEquipments %} <!checkedEquipments not configured yet>
             <tr>
             <td>{{line.equipmentID}}</td>
             <td>{{line.equipmentName}}</td>
-            <td>{{line.units}}</td>
             </tr>
         {% endfor %}
     </table>
 
     <h3>Checkout Equipment</h3>
-    search bar && button
+    <div class="search-container">
+        <form action="/checkoutEquipment">
+            <input type="text" name="equipmentToCheckout" placeholder="Equipment Name" required>
+            <button type="submit">Checkout</button>
+        </form>
+    </div>
+
+    <h3>Return Equipment</h3>
+    <div class="search-container">
+        <form action="/returnEquipment">
+            <input type="text" name="equipmentToReturn" placeholder="Equipment Name" required>
+            <button type="submit">Return</button>
+        </form>
+    </div>
 
 </body>
 </html>
