@@ -211,6 +211,10 @@ def displayFinancialReport(): #Takes data from salary and membership tables to c
     cursor.close()
     return render_template('displayFinancialReport.html', coachSalaries = data, totalCoachSalary = data1, athleteFees = data2, totalAthleteFees = data3, total = data4)
 
+@app.route('/viewRoster')
+def viewRoster():
+    pass
+
 @app.route('/logout')
 def logout():
     session.pop('username')

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Roster</title>
+</head>
+<body>
+    <h3>Roster</h3>
+
+    <style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+    </style>
+
+    <table>
+        <th>Athlete ID</th>
+        <th>Athlete Name</th>
+        {% for line in athletes %} <!athletes not configured yet>
+            <tr>
+            <td>{{line.}}</td>
+            <td>{{line.}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
