@@ -7,62 +7,66 @@
 <body>
     <h1>Financial Report</h1>
 
-<h2>Coach Wages</h2>
-<table>
-	<th>CoachID</th>
-	<th>Wage</th>
+	<h2>Coach Wages</h2>
+	<table>
+		<th>CoachID</th>
+		<th>Wage</th>
 
-{% for line in coachSalaries %}
-	<tr>
-		<td>{{line.coachID}}</td>
-		<td>{{line.wage}}</td>
-	</tr>
-{% endfor %}
-</table>
+	{% for line in coachSalaries %}
+		<tr>
+			<td>{{line.coachID}}</td>
+			<td>{{line.wage}}</td>
+		</tr>
+	{% endfor %}
+	</table>
 
-<table>
-	<th>Total Wage</th>
+	<table>
+		<th>Total Wage</th>
 
-{% for line in totalCoachSalary %}
-	<tr>
-		<td>{{line.totalWage}}</td>
-	</tr>
-{% endfor %}
-</table>
+	{% for line in totalCoachSalary %}
+		<tr>
+			<td>{{line.totalWage}}</td>
+		</tr>
+	{% endfor %}
+	</table>
 
-<h2>Athlete Fees</h2>
-<table>
-	<th>AthleteID</th>
-	<th>Fees</th>
+	<h2>Athlete Fees</h2>
+	<table>
+		<th>AthleteID</th>
+		<th>Fees</th>
 
-{% for line in athleteFees %}
-	<tr>
-		<td>{{line.athleteID}}</td>
-		<td>{{line.fee}}</td>
-	</tr>
-{% endfor %}
-</table>
+	{% for line in athleteFees %}
+		<tr>
+			<td>{{line.athleteID}}</td>
+			<td>{{line.fee}}</td>
+		</tr>
+	{% endfor %}
+	</table>
 
-<table>
-	<th>Total Fee</th>
+	<table>
+		<th>Total Fee</th>
 
-{% for line in totalAthleteFees %}
-	<tr>
-		<td>{{line.totalFee}}</td>
-	</tr>
-{% endfor %}
-</table>
+	{% for line in totalAthleteFees %}
+		<tr>
+			<td>{{line.totalFee}}</td>
+		</tr>
+	{% endfor %}
+	</table>
 
-<h2>Total</h2>
-<table>
-	<th>*The total wages subtracted from the total fees</th>
+	<h2>Total</h2>
+	<table>
+		<th>*The total wages subtracted from the total fees</th>
 
-{% for line in total %}
-	<tr>
-		<td>{{line.totalWage}}</td>
-	</tr>
-{% endfor %}
-</table>
+	{% for line in total %}
+		<tr>
+			<td>{{line.totalWage}}</td>
+		</tr>
+	{% endfor %}
+	</table>
+
+	<br>
+	<br>
+	<a href="/admin">Go Back</a>
 
 </body>
 </html>

@@ -6,19 +6,22 @@
 </head>
 <body>
 
-<form action="/updateSalary" method="GET">
+    <form action="/updateSalary" method="GET">
 
-{% for line in coaches %}
-<input type="radio" name="coachID" value={{line.coachID}}>{{line.coachID}}</input>
+    {% for line in coaches %}
+    <input type="radio" name="coachID" value={{line.coachID}}>{{line.coachID}}</input>
 
+        <br>
+    {% endfor %}
+
+    <input type="number" name = "newWage" placeholder="New Wage" required/> </br>
+
+    <input type="submit" value="Submit">
+
+    </form>
+    <br>
 	<br>
-{% endfor %}
-
-<input type="number" name = "newWage" placeholder="New Wage" required/> </br>
-
-<input type="submit" value="Submit">
-
-</form>
+	<a href="/admin">Go Back</a>
 
 </body>
 </html>
