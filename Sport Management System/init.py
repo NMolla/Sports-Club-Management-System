@@ -235,8 +235,15 @@ def displayFinancialReport(): #Takes data from salary and membership tables to c
     return render_template('displayFinancialReport.html', coachSalaries = data, totalCoachSalary = data1, athleteFees = data2, totalAthleteFees = data3, total = data4)
 
 @app.route('/viewRoster')
-def viewRoster():
-    pass
+def viewRoster(): #Displays the athletes being coached by a selected coach
+    user = session['username']
+    cursor = conn.cursor()
+    query = 'SELECT firstname FROM Users WHERE username = user ORDER BY firstname DESC'
+    cursor.execute(query,(user))
+    data1 = cursor.fetchall()
+    cursor.close()
+    return render_template('viewRoster.html', Athlete Name = data1)
+
 
 @app.route('/logout')
 def logout():
