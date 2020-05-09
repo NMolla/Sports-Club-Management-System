@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pymysql.connect(host='localhost',
                        port = 3306,
                        user='root',
-                       password='',
+                       password='n21452429N',
                        db='SportsManagement',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
@@ -155,15 +155,25 @@ def dropClass():
 def manageEquipments():
     user = session['username']
     cursor = conn.cursor()
-    query1 = 'needs config'  # configure
-    cursor.execute(query1)  # add parameters
+    query1 = 'SELECT eq.ID, eq.Name FROM checkedEquipments AS cE JOIN Equipments AS eq ON ce.equipmentID = eq.ID WHERE cE.userID = %s'  # configure
+    cursor.execute(query1, user)  # add parameters
     data1 = cursor.fetchall()  # list of all enrolled classes
     cursor.close()
     return render_template('manageEquipments.html', checkedEquipments=data1)
 
 @app.route('/checkoutEquipment')
 def checkoutEquipment():
+    user = session['username']
     equipmentToCheckout = request.args['equipmentToCheckout']
+    cursor = conn.cursor()
+    query1 = 'SELECT id FROM Equipments WHERE name = %s'
+    cursor.execute(query1, equipmentToCheckout)
+    data1 = cursor.fetchone()
+
+    ins = 'INSERT INTO CheckedEquipments (userID, equipmentID) VALUES (%s, %s)'
+    cursor.execute(ins, (user, data1['id']))
+    conn.commit()
+    return redirect(url_for('manageEquipments'))
 
 @app.route('/returnEquipment')
 def returnEquipment():
