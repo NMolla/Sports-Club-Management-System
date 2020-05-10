@@ -14,12 +14,14 @@
     </style>
 
     <table>
-        <th>Athlete ID</th>
-        <th>Athlete Name</th>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
         {% for line in athletes %} <!athletes not configured yet>
             <tr>
-            <td>{{line.}}</td>
-            <td>{{line.}}</td>
+            <td>{{line.username}}</td>
+            <td>{{line.firstName}}</td>
+            <td>{{line.lastName}}</td>
             </tr>
         {% endfor %}
     </table>
