@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pymysql.connect(host='localhost',
                        port = 3306,
                        user='root',
-                       password='n21452429N',
+                       password='halleluJah4sql',
                        db='SportsManagement',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
@@ -168,10 +168,13 @@ def dropClass():
 def manageEquipments():
     user = session['username']
     cursor = conn.cursor()
-    query1 = 'SELECT eq.ID, eq.Name FROM checkedEquipments AS cE JOIN Equipments AS eq ON ce.equipmentID = eq.ID WHERE cE.userID = %s'  # configure
-    cursor.execute(query1, user)  # add parameters
-    data1 = cursor.fetchall()  # list of all enrolled classes
+
+    query1 = 'SELECT eq.ID, eq.Name FROM checkedEquipments AS cE JOIN Equipments AS eq ON ce.equipmentID = eq.ID WHERE cE.userID = %s'  
+    cursor.execute(query1, user)  
+    data1 = cursor.fetchall()  # list of all checked equipments
+
     cursor.close()
+
     return render_template('manageEquipments.html', checkedEquipments=data1)
 
 @app.route('/checkoutEquipment')
@@ -183,6 +186,11 @@ def checkoutEquipment():
     cursor.execute(query1, equipmentToCheckout)
     data1 = cursor.fetchone()
 
+    if(data1 is None):
+        error = "Equipment not available."
+        return redirect(url_for('manageEquipments'))
+
+
     ins = 'INSERT INTO CheckedEquipments (userID, equipmentID) VALUES (%s, %s)'
     cursor.execute(ins, (user, data1['id']))
     conn.commit()
@@ -190,7 +198,19 @@ def checkoutEquipment():
 
 @app.route('/returnEquipment')
 def returnEquipment():
+    user = session['username']
     equipmentToReturn = request.args['equipmentToReturn']
+    cursor = conn.cursor()
+
+    query1 = 'SELECT id FROM Equipments WHERE name = %s'
+    cursor.execute(query1, equipmentToReturn)
+    data1 = cursor.fetchone()
+
+    remove = 'DELETE FROM CheckedEquipments WHERE equipmentID = %s AND userID = %s'
+    cursor.execute(remove, (data1['id'], user))
+    conn.commit()
+
+    return redirect(url_for('manageEquipments'))
 
 @app.route('/updateCoachSalary')
 def updateCoachSalary():
