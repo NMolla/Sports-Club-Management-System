@@ -5,12 +5,12 @@ The sports club management system is a system that will store data and analytics
 
 ### Prerequisites
 Minimum specs to run the system(Staff):
-OS: Windows (x86, 32 & 64-bit), Linux, macOS
-HDD: 1GB HD space
-Network: Broadband Internet connection
+* OS: Windows (x86, 32 & 64-bit), Linux, macOS
+* HDD: 1GB HD space
+* Network: Broadband Internet connection
 
 Minimum specs to run the system(Customer):
-Any average device with an internet connection can be used to access the system.
+* Any average device with an internet connection can be used to access the system.
 
 Software required to install the system:
 MySQL
