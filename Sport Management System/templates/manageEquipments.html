@@ -29,7 +29,13 @@
     <h3>Checkout Equipment</h3>
     <div class="search-container">
         <form action="/checkoutEquipment">
-            <input type="text" name="equipmentToCheckout" placeholder="Equipment Name" required>
+       
+            <label for="equipments">Equipment:</label>
+            <select id="equipments" name="equipments">
+            {% for line in equipments %}
+                <option value="{{line.name}}">{{line.name}}</option>
+            {% endfor %}
+            </select>
             <button type="submit">Checkout</button>
         </form>
     </div>

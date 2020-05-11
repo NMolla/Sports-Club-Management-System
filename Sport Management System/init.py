@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pymysql.connect(host='localhost',
                        port = 3306,
                        user='root',
-                       password='',
+                       password='halleluJah4sql',
                        db='SportsManagement',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
@@ -150,12 +150,16 @@ def manageClasses():
     query1 = 'SELECT sportID, coachID, time FROM Teaches WHERE athleteID = %s' # configure
     cursor.execute(query1, user) # add parameters
     data1 = cursor.fetchall() # list of all enrolled classes
+
     cursor.close()
     return render_template('manageClasses.html', registeredClasses=data1)
 
 @app.route('/enrollInClass')
 def enrollInClass():
+    user = session['username']
+    cursor = conn.cursor()
     classToEnroll = request.args['classToEnroll']
+
     # If already enrolled in class raise error.
     # If taking another class during that day raise error
 
@@ -171,13 +175,19 @@ def manageEquipments():
     query1 = 'SELECT eq.ID, eq.Name FROM checkedEquipments AS cE JOIN Equipments AS eq ON ce.equipmentID = eq.ID WHERE cE.userID = %s'  
     cursor.execute(query1, user)  
     data1 = cursor.fetchall()  # list of all checked equipments
+
+    query2 = 'SELECT name FROM Equipments'
+    cursor.execute(query2)
+    data2 = cursor.fetchall()
+
     cursor.close()
-    return render_template('manageEquipments.html', checkedEquipments=data1)
+    return render_template('manageEquipments.html', checkedEquipments=data1, equipments=data2)
 
 @app.route('/checkoutEquipment')
 def checkoutEquipment():
     user = session['username']
-    equipmentToCheckout = request.args['equipmentToCheckout']
+    #equipmentToCheckout = request.args['equipmentToCheckout']
+    equipmentToCheckout =  request.args['equipments']
     cursor = conn.cursor()
     query1 = 'SELECT id FROM Equipments WHERE name = %s'
     cursor.execute(query1, equipmentToCheckout)
@@ -189,6 +199,7 @@ def checkoutEquipment():
     ins = 'INSERT INTO CheckedEquipments (userID, equipmentID) VALUES (%s, %s)'
     cursor.execute(ins, (user, data1['id']))
     conn.commit()
+
     return redirect(url_for('manageEquipments'))
 
 @app.route('/returnEquipment')
