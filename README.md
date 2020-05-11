@@ -13,7 +13,7 @@ Minimum specs to run the system(Customer):
 Any average device with an internet connection can be used to access the system.
 
 Software required to install the system:
-[MySQL Database]
+[Python](https://www.python.org/) 
 ```bash
 https://www.oracle.com/mysql/
 ```
@@ -25,7 +25,7 @@ https://www.python.org/
 
 ## Built With
 
-* [MYSQL WorkBench] (https://www.mysql.com/products/workbench/)
+* [MYSQL WorkBench](https://www.mysql.com/products/workbench/)
 * [Python](https://www.python.org/) 
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) 
 * [PIP](https://pypi.org/project/pip/) 
