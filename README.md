@@ -13,11 +13,11 @@ Minimum specs to run the system(Customer):
 Any average device with an internet connection can be used to access the system.
 
 Software required to install the system:
-[Python](https://www.python.org/) 
+MySQL
 ```bash
 https://www.oracle.com/mysql/
 ```
-[Python]
+Python
 ```bash
 https://www.python.org/
 ```
