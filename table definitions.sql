@@ -13,7 +13,8 @@ create table Users(
 create table Sports(
 	id varchar(255),
     name varchar(255),
-    Primary Key(id)
+    coach varchar(255),
+    primary key(id, name)
 );
 
 create table Equipments(
@@ -53,4 +54,13 @@ create table MembershipFee(
     fee varchar(255),
     primary key(athleteID),
     foreign key(athleteID) references users(username)
+);
+
+create table Classes(
+  athlete varchar(255),
+  coach varchar(255),
+  day varchar(255),
+  time varchar(255),
+  sport varchar(255),
+  primary key(athlete,day,time)
 );

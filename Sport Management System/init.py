@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pymysql.connect(host='localhost',
                        port = 3306,
                        user='root',
-                       password='',
+                       password='sportsmanagement',
                        db='SportsManagement',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
@@ -147,26 +147,73 @@ def coach():
 def manageClasses():
     user = session['username']
     cursor = conn.cursor()
-    query1 = 'SELECT sportID, coachID, time FROM Teaches WHERE athleteID = %s' # configure
+    query1 = 'SELECT coach, day, time, sport FROM Classes WHERE athlete = %s' # configure
     cursor.execute(query1, user) # add parameters
     data1 = cursor.fetchall() # list of all enrolled classes
 
+    query2 = 'SELECT name FROM Sports'
+    cursor.execute(query2)
+    data2 = cursor.fetchall()
+
+    query3 = 'SELECT sport FROM Classes WHERE athlete = %s'
+    cursor.execute(query3, (user))
+    enrolledSports = cursor.fetchall()
+
+    query4 = 'SELECT day FROM Classes WHERE athlete = %s'
+    cursor.execute(query4, (user))
+    enrolledDays = cursor.fetchall()
+
+    query5 = 'SELECT time FROM Classes WHERE athlete = %s'
+    cursor.execute(query5, (user))
+    enrolledTimes = cursor.fetchall()
+
     cursor.close()
-    return render_template('manageClasses.html', registeredClasses=data1)
+    return render_template('manageClasses.html', registeredClasses=data1, sports=data2, enrolledSport=enrolledSports, enrolledDay=enrolledDays, enrolledTime=enrolledTimes)
 
 @app.route('/enrollInClass')
 def enrollInClass():
     user = session['username']
     cursor = conn.cursor()
-    classToEnroll = request.args['classToEnroll']
+
+    Sport = request.args['sport']
+    Day =  request.args['day']
+    Time =  request.args['time']
+
+    query2 = 'SELECT coach FROM Sports WHERE name = %s'
+    cursor.execute(query2, Sport)
+    Coach = cursor.fetchone()
+
+    ins = 'INSERT INTO Classes VALUES (%s, %s, %s, %s, %s)'
+    cursor.execute(ins, (user, Coach['coach'], Day, Time, Sport))
+
+    conn.commit()
 
     # If already enrolled in class raise error.
     # If taking another class during that day raise error
 
+    cursor.close()
+
+    return redirect(url_for('manageClasses'))
+
+
 @app.route('/dropClass')
 def dropClass():
-    classToDrop = request.args['classToDrop']
+    user = session['username']
+    cursor = conn.cursor()
+
+    sport = request.args['enrolledSport']
+    day = request.args['enrolledDay']
+    time = request.args['enrolledTime']    
+
+    drop = 'DELETE FROM Classes WHERE athlete = %s AND time = %s AND day = %s AND sport = %s'
+    cursor.execute(drop, (user, time, day, sport))
+    conn.commit()
+
+    cursor.close()
+
     # If class does not exist raise error
+
+    return redirect(url_for('manageClasses'))
 
 @app.route('/manageEquipments')
 def manageEquipments():

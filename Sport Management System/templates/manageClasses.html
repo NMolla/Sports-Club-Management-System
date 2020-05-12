@@ -18,11 +18,13 @@
     <table>
         <th>Sport</th>
         <th>Coach</th>
+        <th>Day</th>
         <th>Time</th>
-        {% for line in registeredClasses %} <!registeredClasses not configured yet>
+        {% for line in registeredClasses %} 
             <tr>
-            <td>{{line.sportID}}</td>
-            <td>{{line.coachID}}</td>
+            <td>{{line.sport}}</td>
+            <td>{{line.coach}}</td>
+            <td>{{line.day}}</td>
             <td>{{line.time}}</td>
             </tr>
         {% endfor %}
@@ -32,7 +34,34 @@
     <h3>Enroll In Class</h3>
     <div class="search-container">
         <form action="/enrollInClass">
-            <input type="text" name="classToEnroll" placeholder="Sport Name" required>
+
+            <label for="Sport">Sport:</label>
+            <select id="sport" name="sport">
+                {% for line in sports %}
+                <option value="{{line.name}}">{{line.name}}</option>
+                {% endfor %}
+            </select>
+
+    
+            <label for="Day">Day:</label>
+            <select id="day" name="day">
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+            </select>
+           
+            <label for="Time">Time:</label>
+            <select id="time" name="time">
+                <option value="9:00 a.m.">9:00 a.m.</option>
+                <option value="10:00 a.m.">10:00 a.m.</option>
+                <option value="11:00 a.m.">11:00 a.m.</option>
+                <option value="12:00 p.m.">12:00 p.m.</option>
+            </select>
+
             <button type="submit">Enroll</button>
 
         </form>
@@ -41,7 +70,27 @@
     <h3>Drop Class</h3>
     <div class="search-container">
         <form action="/dropClass">
-            <input type="text" name="classToDrop" placeholder="Sport Name" required>
+
+            <label for="dropClass">Select class to drop:</label>
+
+            <select id="sport" name="enrolledSport">
+                {% for line in enrolledSport %}
+                <option value="{{line.name}}">{{line.name}}</option>
+                {% endfor %}
+            </select>
+
+            <select id="day" name="enrolledDay">
+                {% for line in enrolledDay %}
+                <option value="{{line.name}}">{{line.name}}</option>
+                {% endfor %}
+            </select>
+
+            <select id="time" name="enrolledTime">
+                {% for line in enrolledTime %}
+                <option value="{{line.name}}">{{line.name}}</option>
+                {% endfor %}
+            </select>
+
             <button type="submit">Drop</button>
         </form>
     </div>
