@@ -38,6 +38,11 @@
             </select>
             <button type="submit">Checkout</button>
         </form>
+
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+
     </div>
 
     <h3>Return Equipment</h3>

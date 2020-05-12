@@ -168,7 +168,7 @@ def manageClasses():
     enrolledTimes = cursor.fetchall()
 
     cursor.close()
-    return render_template('manageClasses.html', registeredClasses=data1, sports=data2, enrolledSport=enrolledSports, enrolledDay=enrolledDays, enrolledTime=enrolledTimes)
+    return render_template('manageClasses.html', registeredClasses=data1, sports=data2, enrolledSport=enrolledSports, enrolledDay=enrolledDays, enrolledTime=enrolledTimes, error=request.args.get('error'))
 
 @app.route('/enrollInClass')
 def enrollInClass():
@@ -179,17 +179,24 @@ def enrollInClass():
     Day =  request.args['day']
     Time =  request.args['time']
 
+   
     query2 = 'SELECT coach FROM Sports WHERE name = %s'
     cursor.execute(query2, Sport)
     Coach = cursor.fetchone()
+
+    query1 = 'SELECT * FROM Classes WHERE coach = %s AND day = %s AND time = %s'
+    cursor.execute(query1, (Coach['coach'],Day,Time))
+    data = cursor.fetchone()
+
+    if(data):
+        error = "Class not available"
+        return (redirect(url_for('manageClasses', error=error)))
+
 
     ins = 'INSERT INTO Classes VALUES (%s, %s, %s, %s, %s)'
     cursor.execute(ins, (user, Coach['coach'], Day, Time, Sport))
 
     conn.commit()
-
-    # If already enrolled in class raise error.
-    # If taking another class during that day raise error
 
     cursor.close()
 
@@ -228,20 +235,25 @@ def manageEquipments():
     data2 = cursor.fetchall()
 
     cursor.close()
-    return render_template('manageEquipments.html', checkedEquipments=data1, equipments=data2)
+    return render_template('manageEquipments.html', checkedEquipments=data1, equipments=data2, error=request.args.get('error'))
 
 @app.route('/checkoutEquipment')
 def checkoutEquipment():
     user = session['username']
-    #equipmentToCheckout = request.args['equipmentToCheckout']
     equipmentToCheckout =  request.args['equipments']
     cursor = conn.cursor()
+
     query1 = 'SELECT id FROM Equipments WHERE name = %s'
     cursor.execute(query1, equipmentToCheckout)
     data1 = cursor.fetchone()
-    if(data1 is None):
+
+    query2 = 'SELECT * FROM CheckedEquipments WHERE equipmentID = %s'
+    cursor.execute(query2, data1['id'])
+    data2 = cursor.fetchone()
+
+    if(data2):
         error = "Equipment not available."
-        return redirect(url_for('manageEquipments'))
+        return redirect(url_for('manageEquipments', error=error))
 
     ins = 'INSERT INTO CheckedEquipments (userID, equipmentID) VALUES (%s, %s)'
     cursor.execute(ins, (user, data1['id']))

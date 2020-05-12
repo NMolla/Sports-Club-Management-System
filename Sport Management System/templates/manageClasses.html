@@ -64,6 +64,10 @@
 
             <button type="submit">Enroll</button>
 
+            {% if error %}
+		        <p class="error"><strong>Error:</strong> {{error}}</p>
+	        {% endif %}
+
         </form>
     </div>
     <br>
@@ -75,19 +79,19 @@
 
             <select id="sport" name="enrolledSport">
                 {% for line in enrolledSport %}
-                <option value="{{line.name}}">{{line.name}}</option>
+                <option value="{{line.sport}}">{{line.sport}}</option>
                 {% endfor %}
             </select>
 
             <select id="day" name="enrolledDay">
                 {% for line in enrolledDay %}
-                <option value="{{line.name}}">{{line.name}}</option>
+                <option value="{{line.day}}">{{line.day}}</option>
                 {% endfor %}
             </select>
 
             <select id="time" name="enrolledTime">
                 {% for line in enrolledTime %}
-                <option value="{{line.name}}">{{line.name}}</option>
+                <option value="{{line.time}}">{{line.time}}</option>
                 {% endfor %}
             </select>
 
