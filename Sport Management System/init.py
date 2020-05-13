@@ -50,7 +50,12 @@ def loginAuth():
         #creates a session for the the user
         #session is a built in
         session['username'] = username
-        return render_template('athleteHome.html', username=username)
+        cursor = conn.cursor()
+        query = 'SELECT firstName FROM users WHERE username = %s'
+        cursor.execute(query, (username))
+        fname = cursor.fetchone()
+        cursor.close()
+        return render_template('athleteHome.html', fname=fname)
     else:
         cursor = conn.cursor()
         # executes query
@@ -64,7 +69,12 @@ def loginAuth():
             # creates a session for the the user
             # session is a built in
             session['username'] = username
-            return render_template('coachHome.html', username=username)
+            cursor = conn.cursor()
+            query = 'SELECT firstName FROM users WHERE username = %s'
+            cursor.execute(query, (username))
+            fname = cursor.fetchone()
+            cursor.close()
+            return render_template('coachHome.html', fname=fname)
         else:
             cursor = conn.cursor()
             # executes query
@@ -78,7 +88,12 @@ def loginAuth():
                 # creates a session for the the user
                 # session is a built in
                 session['username'] = username
-                return render_template('administratorHome.html', username=username)
+                cursor = conn.cursor()
+                query = 'SELECT firstName FROM users WHERE username = %s'
+                cursor.execute(query, (username))
+                fname = cursor.fetchone()
+                cursor.close()
+                return render_template('administratorHome.html', fname=fname)
             else:
                 #returns an error message to the html page
                 error = 'Invalid login or username'
