@@ -1,28 +1,73 @@
 <html>
-<head>
-</head>
-<body>
-<form action="/registerAuth" method="POST">
-	<input type="text" name = "username" placeholder="username" required/> </br>
-	<input type="password" name = "password" placeholder="password" required/></br>
-	<input type="text" name = "firstName" placeholder="firstName" required/></br>
-	<input type="text" name = "lastName" placeholder="lastName" required/></br>
-	<input type="text" name = "phoneNumber" placeholder="phoneNumber" required/></br>
-	<input type="text" name = "email" placeholder="email" required/></br>
-	<p>Please select your role:</p>
-	<input type="radio" id="athlete" name="role" value="athlete">
-	<label for="athlete">Athlete</label><br>
-	<input type="radio" id="coach" name="role" value="coach">
-	<label for="coach">Coach</label><br>
-	<input type="submit" value = Register />
-	{% if error %}
-		<p class="error"><strong>Error:</strong> {{error}}</p>
-	{% endif %}
-</form>
-
-<a href="/">Go back</a>
-
-</body>
+<title>Register</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+body, html {
+	height: 100%;
+	font-family: "Inconsolata", sans-serif;
+}
+	
+.bgimg {
+	background-position: center;
+	background-size: cover;
+	background-image: url("{{ url_for('static', filename='sportsClub.jpg') }}");
+	min-height: 75%;
+}
+</style>
 
 
+<!-- Links (sit on top) -->
+<div class="w3-top">
+	<div class="w3-row w3-padding w3-black">
+	  <div class="w3-col s3">
+		<a href="/" class="w3-button w3-block w3-black">HOME</a>
+	  </div>
+	  <div class="w3-col s3">
+		<a href="/#about" class="w3-button w3-block w3-black">ABOUT</a>
+	  </div>
+	  <div class="w3-col s3">
+		  <a href="/login" class="w3-button w3-block w3-black">LOGIN</a>
+	  </div>
+	  <div class="w3-col s3">
+		<a href="/register" class="w3-button w3-block w3-black">REGISTER</a>
+	  </div>
+	</div>
+  </div>
+
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large">
+
+<!-- Login -->
+<div class="w3-container" id="menu">
+	<div class="w3-content" style="max-width:700px">
+   
+	  <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide"></span></h5>
+	
+	  <div class="w3-row w3-center w3-card w3-padding">
+		<h5 class="w3-row w3-left w3-padding-14"><span class="w3-tag w3-wide">Please enter your details to register:</span></h5><br><br>
+		<form action="/registerAuth" method="POST">
+			<input class="w3-left" type="text" name = "username" placeholder="username" required/> </br><br>
+			<input class="w3-left" type="password" name = "password" placeholder="password" required/></br><br>
+			<input class="w3-left" type="text" name = "firstName" placeholder="firstName" required/></br><br>
+			<input class="w3-left" type="text" name = "lastName" placeholder="lastName" required/></br><br>
+			<input class="w3-left" type="text" name = "phoneNumber" placeholder="phoneNumber" required/></br><br>
+			<input class="w3-left" type="text" name = "email" placeholder="email" required/></br><br>
+			<h5 class="w3-row w3-left w3-padding-14"><span class="w3-tag w3-wide">Please select your role: </span></h5><br><br>
+			<input class="w3-left" type="radio" id="athlete" name="role" value="athlete">
+			<label class="w3-left" for="athlete">Athlete</label><br>
+			<input class="w3-left" type="radio" id="coach" name="role" value="coach">
+			<label class="w3-left" for="coach">Coach</label><br><br>
+			<input class="w3-button w3-black w3-left w3-round" type="submit" value = Register />
+			{% if error %}
+				<p class="w3-left" class="error"><strong>Error:</strong> {{error}}</p>
+			{% endif %}
+		</form>
+	   </div>
+	</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
 </html>

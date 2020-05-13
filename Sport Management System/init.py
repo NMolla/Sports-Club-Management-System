@@ -17,7 +17,7 @@ conn = pymysql.connect(host='localhost',
 #Define a route to hello function
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    return render_template('design.html')
 
 #Define route for login
 @app.route('/login')
@@ -128,7 +128,7 @@ def registerAuth():
             cursor.close()
         else:
             return render_template('register.html', error=error)
-        return render_template('index.html')
+        return render_template('design.html')
 
 @app.route('/admin')
 def admin():

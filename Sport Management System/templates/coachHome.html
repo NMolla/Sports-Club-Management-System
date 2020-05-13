@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
     <title>Coach Home</title>
-</head>
-<body>
-    <h1>Welcome {{username}}</h1>
-    <br>
-    <a href="/viewRoster">View Roster</a>
-    <br>
-    <a href="/viewCompetitions">View Competitions</a>
-    <br>
-    <br>
-    <a href="/logout">Logout</a>
-</body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+    body, html {
+      height: 100%;
+      font-family: "Inconsolata", sans-serif;
+    }
+    
+    .bgimg {
+      background-position: center;
+      background-size: cover;
+      background-image: url("{{ url_for('static', filename='sportsClub.jpg') }}");
+      min-height: 75%;
+    }
+    
+    </style>
+
+<!-- Links (sit on top) -->
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s3">
+        <a href="#" class="w3-button w3-block w3-black">HOME</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/viewRoster" class="w3-button w3-block w3-black">ROSTER</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/viewCompetitions" class="w3-button w3-block w3-black">COMPETITIONS</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/" class="w3-button w3-block w3-black">LOGOUT</a>
+      </div>
+    </div>
+  </div>
+
+<!-- Header with image -->
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+    <span class="w3-tag">Open from 9am to 12pm</span>
+  </div>
+  <div class="w3-display-middle w3-center">
+    <span class="w3-sand" style="font-size:90px">Hello,<br>{{username}}</span>
+  </div>
+  <div class="w3-display-bottomright w3-center w3-padding-large">
+    <span class="w3-text-white">Saadiyat Island, Abu Dhabi</span>
+  </div>
+</header>
+
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large">
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
 </html>

@@ -1,106 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+
+
     <title>Manage Classes</title>
-</head>
-<body>
-    <h1>Classes Home</h1>
-
-    <h3>Registered Classes</h3>
-
-    <style type="text/css">
-	table, th, td{
-		border: 1px solid black;
-	}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+    body, html {
+        height: 100%;
+        font-family: "Inconsolata", sans-serif;
+    }
+        
+    .bgimg {
+        background-position: center;
+        background-size: cover;
+        background-color:black;
+        min-height: 75%;
+    }
+        
+    .menu {
+        display: none;
+    }
     </style>
-
-    <table>
-        <th>Sport</th>
-        <th>Coach</th>
-        <th>Day</th>
-        <th>Time</th>
-        {% for line in registeredClasses %} 
-            <tr>
-            <td>{{line.sport}}</td>
-            <td>{{line.coach}}</td>
-            <td>{{line.day}}</td>
-            <td>{{line.time}}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <br>
-    <h3>Enroll In Class</h3>
-    <div class="search-container">
-        <form action="/enrollInClass">
-
-            <label for="Sport">Sport:</label>
-            <select id="sport" name="sport">
-                {% for line in sports %}
-                <option value="{{line.name}}">{{line.name}}</option>
-                {% endfor %}
-            </select>
-
     
-            <label for="Day">Day:</label>
-            <select id="day" name="day">
-                <option value="Sunday">Sunday</option>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-            </select>
-           
-            <label for="Time">Time:</label>
-            <select id="time" name="time">
-                <option value="9:00 a.m.">9:00 a.m.</option>
-                <option value="10:00 a.m.">10:00 a.m.</option>
-                <option value="11:00 a.m.">11:00 a.m.</option>
-                <option value="12:00 p.m.">12:00 p.m.</option>
-            </select>
+    <!-- Links (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-row w3-padding w3-black">
+          <div class="w3-col s3">
+            <a href="/athlete" class="w3-button w3-block w3-black">HOME</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/manageClasses" class="w3-button w3-block w3-black">CLASSES</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/manageEquipments" class="w3-button w3-block w3-black">EQUIPMENT</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/" class="w3-button w3-block w3-black">LOGOUT</a>
+          </div>
+        </div>
+      </div>
+    
+    <!-- Add a background color and large text to the whole page -->
+    <div class="w3-sand w3-grayscale w3-large">
+    
+    <!-- Manage Classes -->
+    <div class="w3-container" id="menu">
+        <div class="w3-content" style="max-width:700px">
+       
+          <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide"></span></h5>
+        
+          <div class="w3-row w3-center w3-card w3-padding">
+            <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">YOUR CLASSES</span></h5><br><br>
+            <style type="text/css">
+                table, th, td{
+                    border: 1px solid black;
+                }
+                </style>
+            
+                <table>
+                    <th>Sport</th>
+                    <th>Coach</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    {% for line in registeredClasses %} 
+                        <tr>
+                        <td>{{line.sport}}</td>
+                        <td>{{line.coach}}</td>
+                        <td>{{line.day}}</td>
+                        <td>{{line.time}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>  
+          </div>
+    
+          <div class="w3-row w3-center w3-card w3-padding">
+            <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">ENROLL IN CLASS</span></h5><br><br>
+            
+            <form action="/enrollInClass">
 
-            <button type="submit">Enroll</button>
+                <label for="Sport">Sport:</label>
+                <select class= "w3-border" id="sport" name="sport">
+                    {% for line in sports %}
+                    <option value="{{line.name}}">{{line.name}}</option>
+                    {% endfor %}
+                </select>
+    
+        
+                <label for="Day">Day:</label>
+                <select class= "w3-border" id="day" name="day">
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+               
+                <label for="Time">Time:</label>
+                <select class= "w3-border" id="time" name="time">
+                    <option value="9:00 a.m.">9:00 a.m.</option>
+                    <option value="10:00 a.m.">10:00 a.m.</option>
+                    <option value="11:00 a.m.">11:00 a.m.</option>
+                    <option value="12:00 p.m.">12:00 p.m.</option>
+                </select>
+    
+                <button class="w3-button w3-round w3-black" type="submit">Enroll</button>
+    
+                {% if error %}
+                    <p class="error"><strong>Error:</strong> {{error}}</p>
+                {% endif %}
+    
+            </form>
+          </div>
+    
+          <div class="w3-row w3-center w3-card w3-padding">
+            <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">DROP CLASS</span></h5><br><br>
+            
+            <form action="/dropClass">
 
-            {% if error %}
-		        <p class="error"><strong>Error:</strong> {{error}}</p>
-	        {% endif %}
+                <label for="dropClass">Select class to drop:</label>
+    
+                <select class= "w3-border" id="sport" name="enrolledSport">
+                    {% for line in enrolledSport %}
+                    <option value="{{line.sport}}">{{line.sport}}</option>
+                    {% endfor %}
+                </select>
+    
+                <select class= "w3-border" id="day" name="enrolledDay">
+                    {% for line in enrolledDay %}
+                    <option value="{{line.day}}">{{line.day}}</option>
+                    {% endfor %}
+                </select>
+    
+                <select class= "w3-border" id="time" name="enrolledTime">
+                    {% for line in enrolledTime %}
+                    <option value="{{line.time}}">{{line.time}}</option>
+                    {% endfor %}
+                </select>
+    
+                <button class="w3-button w3-round w3-black" type="submit">Drop</button>
+            </form>
 
-        </form>
-    </div>
-    <br>
-    <h3>Drop Class</h3>
-    <div class="search-container">
-        <form action="/dropClass">
+          </div>
+    
+          
+        </div>
+        <br><br><br><br><br><br><br><br>
+      </div>
+    </html>
 
-            <label for="dropClass">Select class to drop:</label>
 
-            <select id="sport" name="enrolledSport">
-                {% for line in enrolledSport %}
-                <option value="{{line.sport}}">{{line.sport}}</option>
-                {% endfor %}
-            </select>
 
-            <select id="day" name="enrolledDay">
-                {% for line in enrolledDay %}
-                <option value="{{line.day}}">{{line.day}}</option>
-                {% endfor %}
-            </select>
 
-            <select id="time" name="enrolledTime">
-                {% for line in enrolledTime %}
-                <option value="{{line.time}}">{{line.time}}</option>
-                {% endfor %}
-            </select>
 
-            <button type="submit">Drop</button>
-        </form>
-    </div>
 
-    <br>
-	<br>
-	<a href="/athlete">Go Back</a>
-</body>
-</html>
+
+
+
+
+
+

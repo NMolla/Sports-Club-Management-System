@@ -1,59 +1,107 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Manage Equipments</title>
-</head>
+
+<title>Manage Equipments</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+}
+    
+.bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("{{ url_for('static', filename='sportsClub.jpg') }}");
+    min-height: 75%;
+}
+    
+.menu {
+    display: none;
+}
+</style>
 <body>
-    <h1>Equipments</h1>
+<!-- Links (sit on top) -->
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s3">
+        <a href="/athlete" class="w3-button w3-block w3-black">HOME</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/manageClasses" class="w3-button w3-block w3-black">CLASSES</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/manageEquipments" class="w3-button w3-block w3-black">EQUIPMENT</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/" class="w3-button w3-block w3-black">LOGOUT</a>
+      </div>
+    </div>
+  </div>
 
-    <h3>Checked Equipments</h3>
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large">
 
-    <style type="text/css">
-	table, th, td{
-		border: 1px solid black;
-	}
-    </style>
+<!-- Manage Equipments -->
+<div class="w3-container" id="menu">
+    <div class="w3-content" style="max-width:700px">
+   
+      <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide"></span></h5>
+    
+      <div class="w3-row w3-center w3-card w3-padding">
+        <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">YOUR EQUIPMENT</span></h5><br><br>
+        <style type="text/css">
+            table, th, td{
+                border: 1px solid black;
+            }
+            </style>
+        
+            <table>
+                <th>Equipment</th>
+                <th>ID</th>
+                {% for line in checkedEquipments %} 
+                    <tr>
+                    <td>{{line.Name}}</td>
+                    <td>{{line.ID}}</td>
+                    </tr>
+                {% endfor %}
+            </table>        
+      </div>
 
-    <table>
-        <th>ID</th>
-        <th>Name</th>
-        {% for line in checkedEquipments %} 
-            <tr>
-            <td>{{line.ID}}</td>
-            <td>{{line.Name}}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <h3>Checkout Equipment</h3>
-    <div class="search-container">
+      <div class="w3-row w3-center w3-card w3-padding">
+        <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">CHECKOUT EQUIPMENT</span></h5><br><br>
+        
         <form action="/checkoutEquipment">
-       
             <label for="equipments">Equipment:</label>
-            <select id="equipments" name="equipments">
+            <select class= "w3-border" id="equipments" name="equipments">
             {% for line in equipments %}
                 <option value="{{line.name}}">{{line.name}}</option>
             {% endfor %}
             </select>
-            <button type="submit">Checkout</button>
+            <button class="w3-button w3-round w3-black" type="submit">Checkout</button>
         </form>
 
         {% if error %}
             <p class="error"><strong>Error:</strong> {{error}}</p>
-        {% endif %}
+        {% endif %}  
+      </div>
 
-    </div>
-
-    <h3>Return Equipment</h3>
-    <div class="search-container">
+      <div class="w3-row w3-center w3-card w3-padding">
+        <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">RETURN EQUIPMENT</span></h5><br><br>
+        
         <form action="/returnEquipment">
             <input type="text" name="equipmentToReturn" placeholder="Equipment Name" required>
-            <button type="submit">Return</button>
-        </form>
+            <button class="w3-button w3-round w3-black" type="submit">Return</button>
+        </form> 
+      </div>
+
+
     </div>
-    <br>
-	<br>
-	<a href="/athlete">Go Back</a>
+    <br><br><br><br><br><br><br><br><br><br>
+  </div>
 </body>
 </html>
