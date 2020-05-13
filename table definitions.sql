@@ -49,8 +49,8 @@ create table Classes(
     sportID varchar(255),
 	day varchar(255),
 	time varchar(255),
-	primary key(athleteID, day, time)
-    foreign key athleteID references users(username),
-    foreign key coachID references users(username),
-    foreign key sportID references Sports(name)
+	primary key(athleteID, day, time),
+    foreign key(athleteID) references users(username),
+    foreign key(coachID) references users(username),
+    foreign key(sportID) references Sports(name)
 );
