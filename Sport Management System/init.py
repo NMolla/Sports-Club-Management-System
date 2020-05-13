@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pymysql.connect(host='localhost',
                        port = 3306,
                        user='root',
-                       password='sportsmanagement',
+                       password='n21452429N',
                        db='SportsManagement',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
@@ -320,7 +320,7 @@ def displayFinancialReport(): #Takes data from salary and membership tables to c
 def viewRoster(): #Displays the athletes being coached by a selected coach
     user = session['username']
     cursor = conn.cursor()
-    query = 'SELECT u.username, u.firstName, u.lastName FROM Users AS u JOIN Teaches AS t ON u.username = t.athleteID WHERE coachID = %s'
+    query = 'SELECT u.username, u.firstName, u.lastName FROM Users AS u JOIN Classes AS c ON u.username = c.athlete WHERE coach = %s'
     cursor.execute(query,(user))
     data1 = cursor.fetchall()
     cursor.close()
