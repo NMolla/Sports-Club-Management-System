@@ -55,6 +55,7 @@ def loginAuth():
         cursor.execute(query, (username))
         fname = cursor.fetchone()
         cursor.close()
+        session['fname'] = fname
         return render_template('athleteHome.html', fname=fname)
     else:
         cursor = conn.cursor()
@@ -74,6 +75,7 @@ def loginAuth():
             cursor.execute(query, (username))
             fname = cursor.fetchone()
             cursor.close()
+            session['fname'] = fname
             return render_template('coachHome.html', fname=fname)
         else:
             cursor = conn.cursor()
@@ -93,6 +95,7 @@ def loginAuth():
                 cursor.execute(query, (username))
                 fname = cursor.fetchone()
                 cursor.close()
+                session['fname'] = fname
                 return render_template('administratorHome.html', fname=fname)
             else:
                 #returns an error message to the html page
@@ -147,15 +150,18 @@ def registerAuth():
 
 @app.route('/admin')
 def admin():
-    return render_template('administratorHome.html')
+    fname = session['fname']
+    return render_template('administratorHome.html', fname=fname)
 
 @app.route('/athlete')
 def athlete():
-    return render_template('athleteHome.html')
+    fname = session['fname']
+    return render_template('athleteHome.html', fname=fname)
 
 @app.route('/coach')
 def coach():
-    return render_template('coachHome.html')
+    fname = session['fname']
+    return render_template('coachHome.html', fname=fname)
 
 
 @app.route('/manageClasses')
