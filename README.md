@@ -1,6 +1,6 @@
 # Software-Engineering
 # Sports Club Management System
-The sports club management system is a system that will store data and analytics for a sports club. The system will be able to store much more information that the paper-based version and will facilitate accessing and making changes to the stored information. The objective of this system is to help clubs be more organized and have easier access to data especially for clubs of a larger size. The system is desgined to be user-friendly for both staff and customers.  
+The sports club management system is a system that will store data and analytics for a sports club. The system is able to store much more information that the paper-based version and will facilitate accessing and making changes to the stored information. The objective of this system is to help clubs be more organized and have easier access to data especially for clubs of a larger size. The system is desgined to be user-friendly for both staff and customers.  
 
 
 ### Prerequisites
