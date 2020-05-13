@@ -1,34 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>View Roster</title>
-</head>
-<body>
-    <h3>Roster</h3>
-
-    <style type="text/css">
-	table, th, td{
-		border: 1px solid black;
-	}
-    </style>
-
-    <table>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        {% for line in athletes %} <!athletes not configured yet>
-            <tr>
-            <td>{{line.username}}</td>
-            <td>{{line.firstName}}</td>
-            <td>{{line.lastName}}</td>
-            </tr>
-        {% endfor %}
-    </table>
 
 
-    <br>
-	<br>
-	<a href="/coach">Go Back</a>
-</body>
-</html>
+<title>View Roster</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+}
+    
+.bgimg {
+    background-position: center;
+    background-size: cover;
+    background-color:black;
+    min-height: 75%;
+}
+    
+.menu {
+    display: none;
+}
+</style>
+
+
+<!-- Links (sit on top) -->
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s3">
+        <a href="/admin" class="w3-button w3-block w3-black">HOME</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/viewRoster" class="w3-button w3-block w3-black">ROSTER</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/viewCompetitions" class="w3-button w3-block w3-black">COACH SALARY</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="/" class="w3-button w3-block w3-black">LOGOUT</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add a background color and large text to the whole page -->
+  <div class="w3-sand w3-grayscale w3-large">
+    
+<!-- View Roster  -->
+<div class="w3-container" id="menu">
+    <div class="w3-content" style="max-width:700px">
+        <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide"></span></h5>
+        <div class="w3-row w3-center w3-card w3-padding">
+          <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">ROSTER</span></h5><br><br>
+          <style type="text/css">
+            table, th, td{
+                border: 1px solid black;
+            }
+            </style>
+        
+            <table>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                {% for line in athletes %} <!athletes not configured yet>
+                    <tr>
+                    <td>{{line.username}}</td>
+                    <td>{{line.firstName}}</td>
+                    <td>{{line.lastName}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+    
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+</HTML>
+    

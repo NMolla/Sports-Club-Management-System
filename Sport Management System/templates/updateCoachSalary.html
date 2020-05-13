@@ -1,27 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+
+
     <title>Update Coach Salary</title>
-</head>
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+    body, html {
+        height: 100%;
+        font-family: "Inconsolata", sans-serif;
+    }
+        
+    .bgimg {
+        background-position: center;
+        background-size: cover;
+        background-color:black;
+        min-height: 75%;
+    }
+        
+    .menu {
+        display: none;
+    }
+    </style>
+    
+    
+    <!-- Links (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-row w3-padding w3-black">
+          <div class="w3-col s3">
+            <a href="#" class="w3-button w3-block w3-black">HOME</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/viewRoster" class="w3-button w3-block w3-black">ROSTER</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/viewCompetitions" class="w3-button w3-block w3-black">COACH SALARY</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/" class="w3-button w3-block w3-black">LOGOUT</a>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Add a background color and large text to the whole page -->
+      <div class="w3-sand w3-grayscale w3-large">
 
-    <form action="/updateSalary" method="GET">
+     <!-- Update Coach Salary -->
+    <div class="w3-container" id="menu">
+        <div class="w3-content" style="max-width:700px">
+            <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide"></span></h5>
+            <div class="w3-row w3-center w3-card w3-padding">
+            <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">UPDATE COACH SALARY</span></h5><br><br>
 
-    {% for line in coaches %}
-    <input type="radio" name="coachID" value={{line.coachID}}>{{line.coachID}}</input>
+            <form action="/updateSalary" method="GET">
 
-        <br>
-    {% endfor %}
+                {% for line in coaches %}
+                    <input class = "w3-left" type="radio" name="coachID" value={{line.coachID}} ><span class="w3-left">{{line.coachID}}</span></input>
+                    <br>
+                {% endfor %}
+                
+                <br>
+                <input class = "w3-left" type="number" name = "newWage" placeholder="New Wage" required/> </br>
+                <br>
+                <input class="w3-button w3-round w3-black w3-left" type="submit" value="Submit">
+            
+            </form>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-    <input type="number" name = "newWage" placeholder="New Wage" required/> </br>
-
-    <input type="submit" value="Submit">
-
-    </form>
-    <br>
-	<br>
-	<a href="/admin">Go Back</a>
-
-</body>
+</div>
 </html>
