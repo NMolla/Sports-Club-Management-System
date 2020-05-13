@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pymysql.connect(host='localhost',
                        port = 3306,
                        user='root',
-                       password='',
+                       password='sportsmanagement',
                        db='SportsManagement',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
@@ -213,6 +213,15 @@ def enrollInClass():
         error = "Class not available"
         return (redirect(url_for('manageClasses', error=error)))
 
+    query1 = 'SELECT * FROM Classes WHERE athlete = %s AND day = %s AND time = %s'
+    cursor.execute(query1, (user,Day,Time))
+    data1 = cursor.fetchone()
+
+    if(data1):
+        error = "Class not available"
+        return (redirect(url_for('manageClasses', error=error)))
+
+
 
     ins = 'INSERT INTO Classes VALUES (%s, %s, %s, %s, %s)'
     cursor.execute(ins, (user, Coach['coach'], Day, Time, Sport))
@@ -256,7 +265,7 @@ def manageEquipments():
     data2 = cursor.fetchall()
 
     cursor.close()
-    return render_template('manageEquipments.html', checkedEquipments=data1, equipments=data2, error=request.args.get('error'))
+    return render_template('manageEquipments.html', checkedEquipments=data1, equipments=data2, error=request.args.get('error'), error2=request.args.get('error2'))
 
 @app.route('/checkoutEquipment')
 def checkoutEquipment():
@@ -287,9 +296,23 @@ def returnEquipment():
     user = session['username']
     equipmentToReturn = request.args['equipmentToReturn']
     cursor = conn.cursor()
+    
     query1 = 'SELECT id FROM Equipments WHERE name = %s'
     cursor.execute(query1, equipmentToReturn)
     data1 = cursor.fetchone()
+
+    if (data1==None):
+        error = "Equipment not available."
+        return redirect(url_for('manageEquipments', error2=error))
+
+    query2 = 'SELECT * FROM CheckedEquipments WHERE equipmentID = %s AND userID = %s'
+    cursor.execute(query2, (data1['id'], user))
+    data2 = cursor.fetchone()
+
+    if(data2==None):
+        error = "You do not have this equipment checked out."
+        return redirect(url_for('manageEquipments', error2=error))
+
     remove = 'DELETE FROM CheckedEquipments WHERE equipmentID = %s AND userID = %s'
     cursor.execute(remove, (data1['id'], user))
     conn.commit()
@@ -341,9 +364,15 @@ def displayFinancialReport(): #Takes data from salary and membership tables to c
 def viewRoster(): #Displays the athletes being coached by a selected coach
     user = session['username']
     cursor = conn.cursor()
-    query = 'SELECT u.username, u.firstName, u.lastName FROM Users AS u JOIN Classes AS c ON u.username = c.athlete WHERE coach = %s'
-    cursor.execute(query,(user))
+
+    query1 = 'SELECT firstName FROM users WHERE username = %s'
+    cursor.execute(query1,user)
+    coachID = cursor.fetchone()
+
+    query = 'SELECT * FROM classes WHERE coach = %s'
+    cursor.execute(query,coachID['firstName'])
     data1 = cursor.fetchall()
+
     cursor.close()
     return render_template('viewRoster.html', athletes=data1)
 

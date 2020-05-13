@@ -33,10 +33,10 @@ body, html {
         <a href="/admin" class="w3-button w3-block w3-black">HOME</a>
       </div>
       <div class="w3-col s3">
-        <a href="/viewRoster" class="w3-button w3-block w3-black">ROSTER</a>
+        <a href="/viewRoster" class="w3-button w3-block w3-black">CLASSES</a>
       </div>
       <div class="w3-col s3">
-        <a href="/viewCompetitions" class="w3-button w3-block w3-black">COMPETITIONS</a>
+        <a class="w3-button w3-block w3-black">COMPETITIONS</a>
       </div>
       <div class="w3-col s3">
         <a href="/" class="w3-button w3-block w3-black">LOGOUT</a>
@@ -52,22 +52,22 @@ body, html {
     <div class="w3-content" style="max-width:700px">
         <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide"></span></h5>
         <div class="w3-row w3-center w3-card w3-padding">
-          <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">ROSTER</span></h5><br><br>
+          <h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">MY CLASSES</span></h5><br><br>
           <style type="text/css">
             table, th, td{
                 border: 1px solid black;
             }
             </style>
         
-            <table>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                {% for line in athletes %} <!athletes not configured yet>
+            <table class=w3-table>
+                <th>Athlete ID</th>
+                <th>Day</th>
+                <th>Time</th>
+                {% for line in athletes %} 
                     <tr>
-                    <td>{{line.username}}</td>
-                    <td>{{line.firstName}}</td>
-                    <td>{{line.lastName}}</td>
+                    <td>{{line.athlete}}</td>
+                    <td>{{line.day}}</td>
+                    <td>{{line.time}}</td>
                     </tr>
                 {% endfor %}
             </table>
