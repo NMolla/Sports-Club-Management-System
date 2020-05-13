@@ -9,16 +9,29 @@ create table Users(
 	primary key(username)
 );
 
+
 create table Sports(
+	id varchar(255),
     name varchar(255),
     coach varchar(255),
-    primary key(name)
+    primary key(id, name)
 );
 
 create table Equipments(
 	id varchar(255),
     name varchar(255),
     primary key(id)
+);
+
+create table Teaches(
+	coachID varchar(255),
+    athleteID varchar(255),
+    sportID varchar(255),
+    time varchar(255),
+    primary key(coachID, sportID, time),
+    foreign key(coachID) references users(username),
+    foreign key(athleteID) references users(username),
+    foreign key(sportID) references sports(id)
 );
 
 create table CheckedEquipments(
@@ -44,13 +57,10 @@ create table MembershipFee(
 );
 
 create table Classes(
-	athleteID varchar(255),
-	coachID varchar(255),
-    sportID varchar(255),
-	day varchar(255),
-	time varchar(255),
-	primary key(athleteID, day, time)
-    foreign key athleteID references users(username),
-    foreign key coachID references users(username),
-    foreign key sportID references Sports(name)
+  athlete varchar(255),
+  coach varchar(255),
+  day varchar(255),
+  time varchar(255),
+  sport varchar(255),
+  primary key(athlete,day,time)
 );
