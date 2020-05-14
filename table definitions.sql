@@ -23,17 +23,6 @@ create table Equipments(
     primary key(id)
 );
 
-create table Teaches(
-	coachID varchar(255),
-    athleteID varchar(255),
-    sportID varchar(255),
-    time varchar(255),
-    primary key(coachID, sportID, time),
-    foreign key(coachID) references users(username),
-    foreign key(athleteID) references users(username),
-    foreign key(sportID) references sports(id)
-);
-
 create table CheckedEquipments(
 	userID varchar(255),
     equipmentID varchar(255),
