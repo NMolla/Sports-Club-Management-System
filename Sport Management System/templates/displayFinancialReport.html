@@ -1,72 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+    <title>Update Coach Salary</title>
     <meta charset="UTF-8">
-    <title>Financial Report</title>
-</head>
-<body>
-    <h1>Financial Report</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+    body, html {
+        height: 100%;
+        font-family: "Inconsolata", sans-serif;
+    }
+        
+    .bgimg {
+        background-position: center;
+        background-size: cover;
+        background-color:black;
+        min-height: 75%;
+    }
+        
+    .menu {
+        display: none;
+    }
+    </style>
+    
+    
+    <!-- Links (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-row w3-padding w3-black">
+          <div class="w3-col s3">
+            <a href="/admin" class="w3-button w3-block w3-black">HOME</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/displayFinancialReport" class="w3-button w3-block w3-black">FINANCIAL REPORT</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/updateCoachSalary" class="w3-button w3-block w3-black">COACH SALARY</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/" class="w3-button w3-block w3-black">LOGOUT</a>
+          </div>
+         </div>
+     </div>
+    
+	<!-- Add a background color and large text to the whole page -->
+	<div class="w3-sand w3-grayscale w3-large">
 
-	<h2>Coach Wages</h2>
-	<table>
-		<th>CoachID</th>
-		<th>Wage</th>
+	<!-- View Financial Report -->
+	<div class="w3-container" id="menu">
+		<div class="w3-content" style="max-width:700px">
+			<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide"></span></h5>
+			<div class="w3-row w3-center w3-card w3-padding">
+			<h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">COACH WAGES</span></h5><br><br>
+			
+			<style type="text/css">
+				table, th, td{
+					border: 1px solid black;
+				}
+			</style>
 
-	{% for line in coachSalaries %}
-		<tr>
-			<td>{{line.coachID}}</td>
-			<td>{{line.wage}}</td>
-		</tr>
-	{% endfor %}
-	</table>
+			<table class="w3-table">
+				<th>CoachID</th>
+				<th>Wage</th>
+		
+			{% for line in coachSalaries %}
+				<tr>
+					<td>{{line.coachID}}</td>
+					<td>{{line.wage}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+			
+			<h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">TOTAL WAGES</span></h5><br><br>
 
-	<table>
-		<th>Total Wage</th>
+			<table class="w3-table">
+				<th>Total Wages</th>
+		
+			{% for line in totalCoachSalary %}
+				<tr>
+					<td>{{line.totalWage}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+			</div>
 
-	{% for line in totalCoachSalary %}
-		<tr>
-			<td>{{line.totalWage}}</td>
-		</tr>
-	{% endfor %}
-	</table>
+			</div>
+		</div>
 
-	<h2>Athlete Fees</h2>
-	<table>
-		<th>AthleteID</th>
-		<th>Fees</th>
+		<div class="w3-content" style="max-width:700px">
+			<h5 class="w3-center"><span class="w3-tag w3-wide"></span></h5>
+			<div class="w3-row w3-center w3-card w3-padding">
+			<h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">ATHLETE FEES</span></h5><br><br>
 
-	{% for line in athleteFees %}
-		<tr>
-			<td>{{line.athleteID}}</td>
-			<td>{{line.fee}}</td>
-		</tr>
-	{% endfor %}
-	</table>
+			<table class = "w3-table">
+				<th>AthleteID</th>
+				<th>Fees</th>
+		
+			{% for line in athleteFees %}
+				<tr>
+					<td>{{line.athleteID}}</td>
+					<td>{{line.fee}}</td>
+				</tr>
+			{% endfor %}
+			</table>
 
-	<table>
-		<th>Total Fee</th>
+		
+			<h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">TOTAL FEES</span></h5><br><br>
 
-	{% for line in totalAthleteFees %}
-		<tr>
-			<td>{{line.totalFee}}</td>
-		</tr>
-	{% endfor %}
-	</table>
+			<table class="w3-table">
+				<th>Total Fees</th>
+		
+			{% for line in totalAthleteFees %}
+				<tr>
+					<td>{{line.totalFee}}</td>
+				</tr>
+			{% endfor %}
+			</table>
 
-	<h2>Total</h2>
-	<table>
-		<th>*The total wages subtracted from the total fees</th>
+			</div>
+		</div>
+	
 
-	{% for line in total %}
-		<tr>
-			<td>{{line.totalWage}}</td>
-		</tr>
-	{% endfor %}
-	</table>
+		<div class="w3-content" style="max-width:700px">
+			<h5 class="w3-center"><span class="w3-tag w3-wide"></span></h5>
+			<div class="w3-row w3-center w3-card w3-padding">
+			<h5 class="w3-row w3-left w3-padding-4"><span class="w3-tag w3-wide">TOTAL</span></h5><br><br>
 
-	<br>
-	<br>
-	<a href="/admin">Go Back</a>
+			<table class = "w3-table">
+				<th>Total wages subtracted from the total fees:</th>
+		
+			{% for line in total %}
+				<tr>
+					<td>{{line.totalWage}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		
 
-</body>
+			</div>
+		</div>
+
+
+		</div>
+	</div>
+
+
 </html>
