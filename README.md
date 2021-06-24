@@ -6,14 +6,6 @@ The sports club management system is a system that stores data and analytics for
 
 
 ### Prerequisites
-Minimum specs to run the system(Staff):
-* **OS**: Windows (x86, 32 & 64-bit), Linux, macOS
-* **HDD**: 1GB HD space
-* **Network**: Broadband Internet connection
-
-Minimum specs to run the system(Customer):
-* Any average device with an internet connection can be used to access the system.
-
 Software required to install the system:
 * **MySQL**
 ```bash
@@ -27,11 +19,9 @@ https://www.python.org/
 
 ## Built With
 
-* [MYSQL WorkBench](https://www.mysql.com/products/workbench/)
+* [MySQL](https://www.mysql.com/products/workbench/)
 * [Python](https://www.python.org/) 
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) 
-* [PIP](https://pypi.org/project/pip/) 
-* [Visual Studio](https://visualstudio.microsoft.com/) 
 
  
 
