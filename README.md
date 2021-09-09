@@ -21,7 +21,7 @@ https://www.python.org/
 
 * [MySQL](https://www.mysql.com/products/workbench/)
 * [Python](https://www.python.org/) 
-* [HTML]
+* HTML
 
 ## Libraries Required
 
