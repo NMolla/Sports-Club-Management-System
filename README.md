@@ -21,9 +21,12 @@ https://www.python.org/
 
 * [MySQL](https://www.mysql.com/products/workbench/)
 * [Python](https://www.python.org/) 
-* [Flask](https://flask.palletsprojects.com/en/1.1.x/) 
+* [HTML]
 
- 
+## Libraries Required
+
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* [PyMySQL](https://pypi.org/project/PyMySQL/)
 
 ## Authors
 
